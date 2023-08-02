@@ -7,15 +7,20 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
 	public class AgenciaRepositorioTestes
 	{
 		private readonly IAgenciaRepositorio _repositorio;
+		public ITestOutputHelper Output { get; set; }
 
-        public AgenciaRepositorioTestes()
+        public AgenciaRepositorioTestes(ITestOutputHelper output)
         {
+			Output = output;
+			Output.WriteLine("Construtor executado com sucesso.");
+
 			var servico = new ServiceCollection();
 			servico.AddTransient<IAgenciaRepositorio, AgenciaRepositorio>();
 			var provedor = servico.BuildServiceProvider();
